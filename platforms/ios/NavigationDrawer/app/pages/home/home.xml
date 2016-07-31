@@ -1,0 +1,42 @@
+<page
+  xmlns="http://schemas.nativescript.org/tns.xsd"
+  xmlns:drawer="nativescript-telerik-ui/sidedrawer"
+  xmlns:widgets="shared/widgets"
+  xmlns:statusbar="nativescript-statusbar"
+  xmlns:PullRefresh="nativescript-pulltorefresh"
+  loaded="loaded">
+
+  <statusbar:StatusBar ios:barStyle="light" />
+
+  <page.actionBar>
+    <action-bar title="NativeScript">
+      <navigation-button icon="res://ic_menu" tap="toggleDrawer" ios:visibility="collapsed" />
+      <action-bar.actionItems>
+        <ios>
+          <action-item icon="res://ic_menu" ios.position="left" tap="toggleDrawer" />
+        </ios>
+      </action-bar.actionItems>
+    </action-bar>
+  </page.actionBar>
+
+  <drawer:rad-side-drawer id="drawer">
+    <drawer:rad-side-drawer.mainContent>
+
+      <!-- Home page contents -->
+      <grid-layout rows="*" loaded="mainContentLoaded">
+        <PullRefresh:PullToRefresh refresh="refreshList">
+            <list-view items="{{ users }}">
+                <list-view.itemTemplate>
+                    <label text="{{ name }}" row="0" col="1" textWrap="true" />                            
+                </list-view.itemTemplate>
+            </list-view>
+        </PullRefresh:PullToRefresh>  
+      </grid-layout>
+
+    </drawer:rad-side-drawer.mainContent>
+    <drawer:rad-side-drawer.drawerContent>
+      <widgets:drawer-content />
+    </drawer:rad-side-drawer.drawerContent>
+  </drawer:rad-side-drawer>
+
+</page>
